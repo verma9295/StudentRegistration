@@ -1,0 +1,75 @@
+﻿@model StudentRegistration.Models.UserCollection
+
+@{
+    ViewData["Title"] = "Create user";
+}
+
+<section>
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card shadow" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h5 class="text-uppercase text-center mb-5">@ViewBag.BT an account</h5>
+
+<div class="row">
+    <div class="form-outline mb-4">
+        <form asp-action="CreateUser" method="post">
+            @Html.HiddenFor(x=>x.Id)
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-outline mb-4">
+                @*<label asp-for="Name" class="form-label"></label>*@
+                <input asp-for="Name" class="form-control" placeholder="Name" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-outline mb-4">
+                <input asp-for="Age" class="form-control" placeholder="Age" />
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+            <div class="form-outline mb-4">
+                <select asp-for="Gender" asp-items="@(new SelectList(ViewBag.gender,"gid","gname"))" class="form-control" >
+                    <option value="0">--Gender--</option>
+                </select>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+            <div class="form-outline mb-4">
+                <input asp-for="Mobile" class="form-control" placeholder="Mobile" />
+                <span asp-validation-for="Mobile" class="text-danger"></span>
+            </div>
+            <div class="form-outline mb-4">
+                <input asp-for="Username" class="form-control" placeholder="Username" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+             <div class="form-outline mb-4">
+                <input asp-for="Password" class="form-control" placeholder="Password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-outline mb-4">
+                <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm password" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="d-flex justify-content-center">
+                <input onclick="return confirm('Are you sure you want to Saved this?')" type="submit" value="@ViewBag.BT" class="form-control form-control-lg btn btn-primary" />
+            </div>
+            <p class="text-center text-muted mt-5 mb-0"><a asp-action="LogIn" class="fw-bold text-body">Back to Login</a></p>
+        </form>
+    </div>
+</div>
+
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>

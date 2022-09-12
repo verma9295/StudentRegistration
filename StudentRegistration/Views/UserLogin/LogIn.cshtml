@@ -1,0 +1,77 @@
+﻿@model StudentRegistration.Models.User
+
+@{
+    ViewData["Title"] = "User LogIn";
+}
+
+
+<section>
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div id="head1" class="card shadow" style="border-radius: 15px;height:380px;">
+            <div class="card-body p-5">
+				<h4>Sign In</h4>
+
+<div class="row">
+    <div class="form-outline mb-4">
+        <form asp-action="LogIn" asp-controller="UserLogin" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @*<label asp-for="Username" class="form-label"></label>*@
+            <div class="input-group form-group">
+				<div class="input-group-prepend">
+				<span style="color:brown;background-color:gold;" class="input-group-text"><i class="fas fa-user"></i></span>
+				</div>
+                <input asp-for="Username" class="form-control" placeholder="username" />
+				</div>
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @*<label asp-for="Password" class="form-label"></label>*@
+            <div class="input-group form-group">
+				<div class="input-group-prepend">
+				<span style="color:brown;background-color:gold;" class="input-group-text"><i class="fas fa-key"></i></span>
+				</div>
+                <input asp-for="Password" class="form-control" placeholder="password" />
+				</div>
+                <span asp-validation-for="Password" class="text-danger"></span>
+                <span style="color:red">@ViewBag.error</span>
+            </div>
+            <div class="d-flex justify-content-left">
+                <input style="background-color:#499c91;" type="submit" value="Sign In" class="form-control btn btn-primary" /> &nbsp;
+            </div>
+            <p class="text-center text-muted mt-4 mb-0">Don't have an account? <a asp-action="CreateUser" class="fw-bold text-body">Sign Up</a></p>
+            <p class="text-center text-muted mt-3 mb-0"><a asp-action="Forgot" class="fw-bold text-body">Forgot password</a></p>
+
+        </form>
+    </div>
+</div>
+
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+<script>
+document.getElementById("head1").onmousemove = abc;
+document.getElementById("head1").onmouseout = abcd;
+
+function abc(){
+    document.getElementById("head1").style.background = "#09e86a";
+}
+function abcd(){
+    document.getElementById("head1").style.background = "white";
+}
+
+</script>
+
+}
+

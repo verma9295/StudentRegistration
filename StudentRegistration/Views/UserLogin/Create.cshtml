@@ -1,0 +1,219 @@
+﻿@model StudentRegistration.Models.tblCollection
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<h5 style="color:green;">@TempData["succesMasse"]</h5>
+
+
+ <div class="col-lg-9">
+    <div class="section-title position-relative mb-4">
+        <h4><i class="bi bi-pencil-fill"></i> @ViewBag.BT an Registration</h4>
+        <hr style="color:green;" />
+    </div>
+    <div class="contact-form">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            @Html.HiddenFor(x=>x.Id)
+            <div class="row">
+                <div class="col-6 form-group">
+                    <input asp-for="Name" class="form-control border-top-0 border-right-0 border-left-0 p-1" placeholder="Your Name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                    @*<input type="text" class="form-control border-top-0 border-right-0 border-left-0 p-0" placeholder="Your Name" required="required">*@
+                </div>
+                <div class="col-6 form-group">
+                    <input asp-for="fName" class="form-control border-top-0 border-right-0 border-left-0 p-1" placeholder="Father Name" />
+                    <span asp-validation-for="fName" class="text-danger"></span>
+                 </div>
+             </div>
+             <div class="row">
+                <div class="col-6 form-group">
+                    <input asp-for="Category" class="form-control border-top-0 border-right-0 border-left-0 p-0" placeholder="Category" />
+                    <span asp-validation-for="Category" class="text-danger"></span>
+                </div>
+                <div class="col-6 form-group">
+                    <input asp-for="regno" class="form-control border-top-0 border-right-0 border-left-0 p-0" placeholder="Registration" />
+                    <span asp-validation-for="regno" class="text-danger"></span>
+                </div>
+             </div>
+             <div class="row">
+                <div class="col-6 form-group">
+                    <input asp-for="Age" class="form-control border-top-0 border-right-0 border-left-0 p-0" placeholder="Age" />
+                    <span asp-validation-for="Age" class="text-danger"></span>
+                </div>
+                <div class="col-6 form-group">
+                    <select asp-for="Gender" asp-items="@(new SelectList(ViewBag.gender,"gid","gname"))" class="form-control border-top-0 border-right-0 border-left-0 p-0" >
+                    <option value="0">--Gender--</option>
+                    </select>
+                    <span asp-validation-for="Gender" class="text-danger"></span>
+                </div>
+             </div>
+             <div class="row">
+                <div class="col-6 form-group">
+                <select asp-for="State" class="form-control border-top-0 border-right-0 border-left-0 p-0" asp-items="@(new SelectList(ViewBag.stt,"sid","sname"))" onchange="BindCity()">
+                <option value="0">--Select state--</option>
+                </select>
+                <span asp-validation-for="State" class="text-danger"></span>
+                </div>
+                <div class="col-6 form-group">
+                    <select asp-for="City" class="form-control border-top-0 border-right-0 border-left-0 p-0" asp-items="@(new SelectList(ViewBag.citi,"cid","cname"))">
+                    <option value="0">--Select city--</option>
+                    </select>
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+             </div>
+             <div class="row">
+                <div class="col-6 form-group">
+                    <input required readonly asp-for="Email" value="@ViewBag.tt" asp class="form-control border-top-0 border-right-0 border-left-0 p-0" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="col-6 form-group">
+                    <input type="file" id="FileImage" name="file" class="form-control" />
+                     @{
+                    if(Model.Id > 0)
+                    {
+                                <img src="~/Images/@Model.ProfileImage" width="80px" height="80px" />
+                     }
+                }
+                    <span asp-validation-for="ProfileImage" class="text-danger"></span>
+                    </div>
+                </div>
+             <div>
+             <button onclick="return confirm('Are you sure you want to Saved this?')" class="btn btn-primary py-2 px-3" type="submit">@ViewBag.BT</button>
+                <a href="/UserLogin/Reset" class="btn btn-danger py-2 px-3">Reset</a>
+            </div>
+        </form>
+    </div>
+ </div>
+
+
+@*<section>
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card shadow" style="border-radius: 15px;background-color:aquamarine">
+            <div class="card-body p-5">
+              <h5 class="text-uppercase text-center mb-5">@ViewBag.BT an Registration</h5>
+
+<div class="row">
+    <div class="form-outline mb-4">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            @Html.HiddenFor(x=>x.Id)
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-outline mb-4">
+                <input asp-for="Name" class="form-control" placeholder="Student name" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-outline mb-4">
+                <input asp-for="fName" class="form-control" placeholder="Father name" />
+                <span asp-validation-for="fName" class="text-danger"></span>
+            </div>
+            <div class="form-outline mb-4">
+                <input asp-for="Category" class="form-control" placeholder="Caste category" />
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+            <div class="form-outline mb-4">
+                <input asp-for="regno" class="form-control" placeholder="Registration number" />
+                <span asp-validation-for="regno" class="text-danger"></span>
+            </div>
+            <div class="form-outline mb-4">
+                <input asp-for="Age" class="form-control" placeholder="Student Age" />
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+            <div class="form-outline mb-4">
+                <select asp-for="Gender" asp-items="@(new SelectList(ViewBag.gender,"gid","gname"))" class="form-control" placeholder="Student Gender" >
+                    <option value="0">--Gender--</option>
+                </select>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+            <div class="form-outline mb-4">
+                <select asp-for="State" class="form-control" asp-items="@(new SelectList(ViewBag.stt,"sid","sname"))" onchange="BindCity()">
+                    <option value="0">--Select state--</option>
+                </select>
+                <span asp-validation-for="State" class="text-danger"></span>
+            </div>
+            <div class="form-outline mb-4">
+                <select asp-for="City" class="form-control" asp-items="@(new SelectList(ViewBag.citi,"cid","cname"))">
+                    <option value="0">--Select city--</option>
+                </select>
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <div class="form-outline mb-4">
+                <input asp-for="Email" class="form-control" placeholder="Email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-outline mb-4">
+                <input type="file" id="FileImage" name="file" class="form-control" />
+                <span asp-validation-for="ProfileImage" class="text-danger"></span>
+            </div>
+            <div class="d-flex justify-content-center">
+                <input onclick="return confirm('Are you sure you want to Saved this?')" style="margin-top:7px;" type="submit" value="@ViewBag.BT" class="btn btn-primary" /> &nbsp;
+                <a style="margin-top:7px;" href="/UserLogin/Reset" class="btn btn-danger">Reset</a>
+            </div>
+            <p class="text-center text-muted mt-5 mb-0"><a asp-action="Index1" class="fw-bold text-body">Back to Home</a></p>
+        </form>
+    </div>
+</div>
+
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+*@
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+}
+
+<script src="~/lib/jquery/dist/jquery.js"></script>  
+<script type="text/javascript">
+function BindCity() {
+    if($("#User_Id").val()>0)
+    {
+        $.ajax({
+        url: '../GetCity',
+        type: 'post',
+        data: { A:$("#State").val() },
+        success: function (data) {
+            $("#City").empty();
+            $("#City").append($('<option></option>').html("--select--").val(0));
+
+            for (var i = 0; i < data.length; i++) {
+                $("#City").append($('<option></option>').html(data[i].cname).val(data[i].cid));
+            }
+        },
+        error: function() {
+            alert('City not Bind!!');
+        }
+    });
+    }
+    else
+    {
+        $.ajax({
+        url: '../UserLogin/GetCity',
+        type: 'post',
+        data: { A:$("#State").val() },
+        success: function (data) {
+            $("#City").empty();
+            $("#City").append($('<option></option>').html("--select--").val(0));
+
+            for (var i = 0; i < data.length; i++) {
+                $("#City").append($('<option></option>').html(data[i].cname).val(data[i].cid));
+            }
+        },
+        error: function() {
+            alert('City not Bind!!');
+        }
+    });
+    }
+    }
+    
+
+</script>
+

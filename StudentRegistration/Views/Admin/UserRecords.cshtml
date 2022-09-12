@@ -1,0 +1,172 @@
+﻿@model IEnumerable<StudentRegistration.Models.userJoin>
+
+@{
+    ViewData["Title"] = "UserRecords";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<h5 style="color:green;">@TempData["delMass"]</h5>
+
+
+
+<section>
+<div class="container">
+<div class="row">
+<div class="col-lg-12">
+
+   <div class="row">
+    <div class="col-md-12 text-right">
+    <form asp-action="UserRecords" asp-controller="Admin">
+        <input style="padding:5px;margin-bottom:5px;float:right;border:1px solid green; border-radius:5px;" type="text" name="searchName" placeholder="search name" />
+    </form>
+   </div>
+</div>
+
+
+    <div class="row" style="text-align:center;background-color:grey;color:white;font-weight:bold; border:1px solid gray;padding-top:6px;">
+     <div class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Name)
+      </div>
+     <div class="col-sm-1">
+        @Html.DisplayNameFor(model => model.Age)
+      </div>
+     <div class="col-sm-1">
+        @Html.DisplayNameFor(model => model.Gender)
+      </div>
+     <div class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Mobile)
+      </div>
+     <div class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Username)
+      </div>
+     <div class="col-sm-1">
+        @Html.DisplayNameFor(model => model.Password)
+      </div>
+     <div class="col-sm-2">
+        @Html.DisplayNameFor(model => model.ConfirmPassword)
+      </div>
+     <div class="col-sm-1">
+        Action
+      </div>
+    </div>
+
+ @if(Model.Count() == 0)
+        {
+           <p><script>alert("Data not found");</script></p>
+           <p style="color:red;">Data not found</p>
+           <h6><a asp-action="UserRecords">Back to List</a></h6>
+        }
+        else
+        {
+@foreach (var item in Model) {
+    <div class="row" style="text-align:center; border:1px solid gray;padding-top:6px;">
+     <div class="col-sm-2">
+        @Html.DisplayFor(modelItem => item.Name)
+      </div>
+     <div class="col-sm-1">
+        @Html.DisplayFor(modelItem => item.Age)
+      </div>
+     <div class="col-sm-1">
+        @Html.DisplayFor(modelItem => item.Gender)
+      </div>
+     <div class="col-sm-2">
+        @Html.DisplayFor(modelItem => item.Mobile)
+      </div>
+     <div class="col-sm-2">
+        @Html.DisplayFor(modelItem => item.Username)
+      </div>
+     <div class="col-sm-1">
+        @Html.DisplayFor(modelItem => item.Password)
+      </div>
+     <div class="col-sm-2">
+        @Html.DisplayFor(modelItem => item.ConfirmPassword)
+      </div>
+     <div class="col-sm-1">
+         <a asp-action="CreateUser" asp-controller="Admin" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a> |
+         <a onclick="return confirm('Are you sure you want to delete this?')" asp-action="DeleteUser" asp-controller="Admin" asp-route-id="@item.Id"><i class="bi bi-trash"></i></a>
+      </div>
+    </div>
+}}
+</div>
+
+</div>
+</div>
+</section>
+
+
+
+@*<table class="table" style="font-size:14px;text-align:center; border:2px solid darkgrey;">
+    <thead style="background-color:darkgrey;color:white;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mobile)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ConfirmPassword)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody style="font-size:14px;">
+        @if(Model.Count() == 0)
+        {
+            <tr>
+                <td>
+                    <p><script>alert("Data not found");</script></p>
+                    <p style="color:red;">Data not found</p>
+                    <h6><a asp-action="UserRecords">Back to List</a></h6>
+                </td>
+            </tr>
+        }
+        else
+        {
+
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mobile)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConfirmPassword)
+            </td>
+            <td>
+                <a asp-action="CreateUser" asp-controller="Admin" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a> |
+                <a onclick="return confirm('Are you sure you want to delete this?')" asp-action="DeleteUser" asp-controller="Admin" asp-route-id="@item.Id"><i class="bi bi-trash"></i></a>
+            </td>
+        </tr>
+}
+}
+
+</tbody>
+</table>
+*@

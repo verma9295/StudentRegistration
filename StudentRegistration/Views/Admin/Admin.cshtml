@@ -1,0 +1,74 @@
+﻿@model StudentRegistration.Models.Admin
+
+@{
+    ViewData["Title"] = "Admin LogIn";
+}
+
+<section>
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div id="admin" class="card shadow" style="border-radius: 15px;height:300px;">
+            <div class="card-body p-5">
+				<h4>Admin Login</h4>
+
+<div class="row">
+    <div class="form-outline mb-4">
+        <form asp-action="Admin" asp-controller="Admin" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @*<label asp-for="Username" class="form-label"></label>*@
+            <div class="input-group form-group">
+				<div class="input-group-prepend">
+				<span style="color:brown;background-color:gold;" class="input-group-text"><i class="fas fa-user"></i></span>
+				</div>
+                <input asp-for="Username" class="form-control" placeholder="username" />
+				</div>
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @*<label asp-for="Password" class="form-label"></label>*@
+            <div class="input-group form-group">
+				<div class="input-group-prepend">
+				<span style="color:brown;background-color:gold;" class="input-group-text"><i class="fas fa-key"></i></span>
+				</div>
+                <input asp-for="Password" class="form-control" placeholder="password" />
+				</div>
+                <span asp-validation-for="Password" class="text-danger"></span>
+                <span style="color:red">@ViewBag.error</span>
+            </div>
+            <div class="d-flex justify-content-left">
+                <input style="background-color:#a19627;" type="submit" value="Login" class="form-control btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script>
+document.getElementById("admin").onmousemove = abc;
+document.getElementById("admin").onmouseout = abcd;
+
+function abc(){
+    document.getElementById("admin").style.background = "#07eafa";
+}
+function abcd(){
+    document.getElementById("admin").style.background = "white";
+}
+
+</script>
+
+}
+
